@@ -35,6 +35,13 @@ namespace Hpdi.Vss2Git
             set { excludeFiles = value; }
         }
 
+        private bool treatExcludeAsRawRegex;
+        public bool TreatExcludeAsRawRegex
+        {
+            get { return treatExcludeAsRawRegex; }
+            set { treatExcludeAsRawRegex = value; }
+        }
+
         private readonly VssDatabase database;
         public VssDatabase Database
         {
@@ -111,9 +118,16 @@ namespace Hpdi.Vss2Git
             PathMatcher exclusionMatcher = null;
             if (!string.IsNullOrEmpty(excludeFiles))
             {
-                var excludeFileArray = excludeFiles.Split(
-                    new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-                exclusionMatcher = new PathMatcher(excludeFileArray);
+                if (!treatExcludeAsRawRegex)
+                {
+                    var excludeFileArray = excludeFiles.Split(
+                        new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                    exclusionMatcher = new PathMatcher(excludeFileArray);
+                }
+                else
+                {
+                    exclusionMatcher = new PathMatcher(excludeFiles, true);
+                }
             }
 
             workQueue.AddLast(delegate(object work)

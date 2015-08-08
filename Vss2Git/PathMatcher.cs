@@ -32,9 +32,9 @@ namespace Hpdi.Vss2Git
 
         private readonly Regex regex;
 
-        public PathMatcher(string pattern)
+        public PathMatcher(string pattern, bool treatAsRawRegex)
         {
-            regex = new Regex(ConvertPattern(pattern),
+            regex = new Regex(treatAsRawRegex ? pattern: ConvertPattern(pattern),
                 RegexOptions.IgnoreCase | RegexOptions.Singleline);
         }
 

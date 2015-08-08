@@ -142,5 +142,17 @@ namespace Hpdi.Vss2Git.Properties {
                 this["ForceAnnotatedTags"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool VssExcludePathsIsRawRegex {
+            get {
+                return ((bool)(this["VssExcludePathsIsRawRegex"]));
+            }
+            set {
+                this["VssExcludePathsIsRawRegex"] = value;
+            }
+        }
     }
 }

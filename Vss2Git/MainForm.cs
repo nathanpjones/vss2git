@@ -95,6 +95,7 @@ namespace Hpdi.Vss2Git
                 if (!string.IsNullOrEmpty(excludeTextBox.Text))
                 {
                     revisionAnalyzer.ExcludeFiles = excludeTextBox.Text;
+                    revisionAnalyzer.TreatExcludeAsRawRegex = rawRegexCheckBox.Checked;
                 }
                 revisionAnalyzer.AddItem(project);
 
@@ -223,6 +224,7 @@ namespace Hpdi.Vss2Git
             vssDirTextBox.Text = settings.VssDirectory;
             vssProjectTextBox.Text = settings.VssProject;
             excludeTextBox.Text = settings.VssExcludePaths;
+            rawRegexCheckBox.Checked = settings.VssExcludePathsIsRawRegex;
             outDirTextBox.Text = settings.GitDirectory;
             domainTextBox.Text = settings.DefaultEmailDomain;
             logTextBox.Text = settings.LogFile;
@@ -238,6 +240,7 @@ namespace Hpdi.Vss2Git
             settings.VssDirectory = vssDirTextBox.Text;
             settings.VssProject = vssProjectTextBox.Text;
             settings.VssExcludePaths = excludeTextBox.Text;
+            settings.VssExcludePathsIsRawRegex = rawRegexCheckBox.Checked;
             settings.GitDirectory = outDirTextBox.Text;
             settings.DefaultEmailDomain = domainTextBox.Text;
             settings.LogFile = logTextBox.Text;

@@ -536,6 +536,7 @@ namespace Hpdi.Vss2Git
             if (lastSlash > 0)
             {
                 var newParentSpec = newProjectSpec.Substring(0, lastSlash);
+                if (newParentSpec == "$") newParentSpec = "$/";
                 var parentInfo = ResolveProjectSpec(newParentSpec);
                 if (parentInfo != null)
                 {
@@ -583,7 +584,7 @@ namespace Hpdi.Vss2Git
 
         private VssProjectInfo ResolveProjectSpec(string projectSpec)
         {
-            if (!projectSpec.StartsWith("$/"))
+            if (!projectSpec.StartsWith("$/") && projectSpec != "$")
             {
                 throw new ArgumentException("Project spec must start with $/", "projectSpec");
             }
